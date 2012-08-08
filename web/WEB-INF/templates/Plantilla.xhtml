@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <head>
+        <title><ui:insert name="title">Sensor Mando</ui:insert></title>
+        <meta name="description" content="Aplicación web Sensor Mando" />
+        <meta name="author" content="Raúl García" />
+        <!--  [if lt IE 9]-->
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <!-- [endif] -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <style>
+            body { padding-top: 60px; }
+        </style>
+        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/>
+
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <ui:insert name="navbar-top" />
+
+
+                    <a class="btn btn-navbar" data-toggle="collapse"
+                       data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span>
+                    </a> <a class="brand" href="#">Project name</a>
+                    <div class="btn-group pull-right">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-user"></i> Username <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Sign Out</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3">
+                    <div class="well sidebar-nav">
+                        <ui:insert name="sidebar-nav" />
+
+                        <ul class="nav nav-list">
+                            <li class="nav-header">Sidebar</li>
+                            <li class="active"><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li class="nav-header">Sidebar</li>
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li class="nav-header">Sidebar</li>
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                        </ul>
+
+
+                    </div>
+                    <!--/.well -->
+                </div>
+                <!--/span-->
+                <div class="span9">
+
+                    <ui:insert name="content" />
+                    <!--/row-->
+                </div>
+                <!--/span-->
+            </div>
+            <!--/row-->
+        </div>
+
+
+        <footer id="footer">
+            <ui:insert name="footer">
+                Footer area.  See comments below this line in the source.
+                <!--  include your header file or uncomment the include below and create footer.xhtml in this directory -->
+                <!--<ui:include src="footer.xhtml"/>  -->
+            </ui:insert>
+        </footer>
+        <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+    </body>
+
+</html>
