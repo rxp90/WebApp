@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html">
-<ui:composition template="/WEB-INF/templates/Plantilla.xhtml">
-	<ui:define name="content">
-		<h:form>
-			<h:panelGrid columns="2">
-				<h:outputText value="Name"></h:outputText>
-				<h:inputText value="#{loginBean.name}"></h:inputText>
-				<h:outputText value="Password"></h:outputText>
-				<h:inputSecret value="#{loginBean.password}"></h:inputSecret>
-			</h:panelGrid>
-			<h:commandButton value="Login" action="login"></h:commandButton>
-		</h:form>
-	</ui:define>
-</ui:composition>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:body>
+        <ui:composition template="/WEB-INF/templates/layout.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <div class="hero-unit">
+                        <h1><h:outputText value="#{msg.bienvenido}"/></h1>
+                        <p>Sensor Mando es un proyecto de final de carrera desarrollado por Raúl García Calvo y Juan Francisco López Soriano.</p>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span5">
+                            <h2>Ya dispongo de cuenta</h2>
+                            <p>Si ya dispones de una cuenta en la aplicación sólo tienes que hacer clic en el botón de abajo.</p>
+                            <h:commandButton class="btn btn-large" action="#{loginBean.setName('HOLA')}" value="Iniciar sesión"/>
+                        </div>
+                        <div class="span5">
+                            <h2>Deseo crear una cuenta</h2>
+                            <p>Si no tienes cuenta y deseas disfrutar de las ventajas de ser usuario, haz clic en el botón de 'Registrarse'.</p>
+                            <h:commandButton type="submit" class="btn btn-large" action="#{registroBean.redirige()}" value="Submit"/>
+
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
 </html>

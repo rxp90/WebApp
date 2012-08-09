@@ -27,8 +27,9 @@ public class LoginBean {
         return name;
     }
 
-    public void setName(final String name) {
+    public String setName(final String name) {
         this.name = name;
+        return "login";
     }
 
     public String getPassword() {
