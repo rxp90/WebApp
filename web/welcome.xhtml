@@ -1,8 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html>
-<ui:composition template="/WEB-INF/templates/layout.xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html">
-    <ui:define name="content">
-        <h:outputLabel value="Welcome #{loginBean.name}"></h:outputLabel>
-    </ui:define>
-</ui:composition>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:body>
+        <ui:composition template="/WEB-INF/templates/layout.xhtml">
+            <!--  <div class="span10"> -->
+            <ui:define name="content">
+                <h:outputLabel value="Welcome #{userControllerBean.usuario.nombre}"></h:outputLabel>
+            </ui:define>
+            <!-- </div> -->
+        </ui:composition>
+    </h:body>
+</html>

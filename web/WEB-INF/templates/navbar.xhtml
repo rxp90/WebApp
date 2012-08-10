@@ -1,26 +1,48 @@
-<!DOCTYPE html>
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <h:form>
+        
+        <!-- Título izquierda -->
 
-    <a class="btn btn-navbar" data-toggle="collapse"
-       data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-            class="icon-bar"></span> <span class="icon-bar"></span>
-    </a> <a class="brand" href="#">Project name</a>
-    <div class="btn-group pull-right">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-user"></i> Username <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a href="#">Profile</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Sign Out</a></li>
-        </ul>
-    </div>
-    <div class="nav-collapse">
-        <ul class="nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
+        <a class="btn btn-navbar" data-toggle="collapse"
+           data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+                class="icon-bar"></span> <span class="icon-bar"></span>
+        </a> <a class="brand" href="#">Project name</a>
+
+        <!-- Botón derecha -->
+
+        <h:panelGroup rendered="#{userControllerBean.loggedIn}">
+            <div class="btn-group pull-right">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i><h:outputText value="#{userControllerBean.usuario.username}"/><span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Profile</a></li>
+                    <li class="divider"></li>
+                    <li><h:commandLink value="Cerrar sesión" action="#{loginBean.logout()}"/></li>
+                </ul>
+            </div>
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{!userControllerBean.loggedIn}">
+            <div class="btn-group pull-right">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i><h:outputText value="Inicie sesión"/><span class="caret"></span>
+                </a>
+            </div>
+        </h:panelGroup>
+
+        <!-- Opciones izquierda -->
+
+        <div class="nav-collapse">
+            <ul class="nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </h:form>
     <!--/.nav-collapse -->
 </ui:composition>

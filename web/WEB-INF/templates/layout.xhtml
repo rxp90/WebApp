@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?> <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -30,24 +30,21 @@
         </div>
         <div class="container">
             <div class="row-fluid">
-                <div class="span2">
-                    <ui:insert name="sidebar">
-                        <ui:include src="sidebar.xhtml"/>
-                    </ui:insert>
-                    <!--/.well -->
-                </div>
-                <div class="span10">
-                    <ui:insert name="content">
-                        <ui:include src="content.xhtml" />
-                    </ui:insert>
-
-                </div>
+                <ui:insert name="sidebar">
+                    <!--    <ui:include src="sidebar.xhtml"/> -->
+                </ui:insert>
+                <!--/.well -->
+                <ui:insert name="content">
+                    <ui:include src="content.xhtml" />
+                </ui:insert>
             </div>
         </div>
 
         <footer id="footer">
             <ui:insert name="footer">
-                <ui:include src="footer.xhtml"/>
+                <div class="container">
+                    <ui:include src="footer.xhtml"/>
+                </div>
             </ui:insert>
 
 

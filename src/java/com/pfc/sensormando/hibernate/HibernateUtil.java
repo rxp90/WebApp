@@ -5,7 +5,6 @@
 package com.pfc.sensormando.hibernate;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
 /**
@@ -22,7 +21,7 @@ public class HibernateUtil {
         try {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             // config file.
-            AnnotationConfiguration cfg = new AnnotationConfiguration();
+            Configuration cfg = new Configuration();
             cfg.configure("hibernate.cfg.xml");
             cfg.addAnnotatedClass(com.pfc.sensormando.hibernate.Usuarios.class);
             sessionFactory = cfg.buildSessionFactory();
