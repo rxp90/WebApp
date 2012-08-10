@@ -15,7 +15,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class UserControllerBean implements Serializable{
+public class UserControllerBean implements Serializable {
 
     /**
      * Usuario perteneciente a la sesión.
@@ -38,5 +38,9 @@ public class UserControllerBean implements Serializable{
 
     public boolean isLoggedIn() {
         return usuario != null;
+    }
+
+    public boolean isAdmin() {
+        return usuario != null && usuario.getAdministrador() == 'y';
     }
 }

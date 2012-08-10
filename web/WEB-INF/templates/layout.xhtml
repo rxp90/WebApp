@@ -11,6 +11,8 @@
         <meta name="author" content="Raúl García" />
         <!--  [if lt IE 9]-->
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://java.com/js/deployJava.js"></script>
+
         <!-- [endif] -->
         <h:outputStylesheet name="bootstrap/css/bootstrap.min.css" />
         <style>
@@ -31,7 +33,7 @@
         <div class="container">
             <div class="row-fluid">
                 <ui:insert name="sidebar">
-                    <!--    <ui:include src="sidebar.xhtml"/> -->
+                    <ui:include src="sidebar.xhtml"/>
                 </ui:insert>
                 <!--/.well -->
                 <ui:insert name="content">

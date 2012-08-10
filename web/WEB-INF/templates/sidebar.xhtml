@@ -1,24 +1,39 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets">
-    <div class="span2">
-        <ul class="nav nav-list">
-            <li class="nav-header">Sidebar</li>
-            <li class="active"><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li class="nav-header">Sidebar</li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li class="nav-header">Sidebar</li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-        </ul>
-    </div>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <h:form rendered="#{userControllerBean.loggedIn}" class="span4">
+        <div class="well">
+            <ul class="nav nav-list">
+                <li class="nav-header">Usuario</li>
+                <li class="active">
+                    <h:commandLink value="Mi perfil"  action="perfil">
+                        <i class="icon-white icon-home pull-left"/>
+                    </h:commandLink>
+                </li>
+                <li>
+                    <h:link value="Juego Bouncing Ball" outcome="bouncingBall">
+                        <i class="icon-play pull-left"/>
+                    </h:link>
+                </li>
+                <h:panelGroup rendered="#{userControllerBean.admin}">
+                    <li class="nav-header">Administrador</li>
+                    <li><a href="#"><i class="icon-star"></i>Dar privilegios a otro usuario</a></li>
+                    <li>
+                        <h:commandLink value="Crear usuario"  action="registro">
+                            <i class=" icon-plus pull-left"/>
+                        </h:commandLink>
+                    </li>
+                    <li><a href="#"><i class="icon-remove"></i>Eliminar un usuario</a></li>
+                    <li><a href="#"><i class="icon-edit"></i>Modificar datos de un usuario</a></li>
+                </h:panelGroup>
+                <li class="divider"></li>
+                <li>        
+                    <h:commandLink value="Cerrar sesión"  action="#{loginBean.logout()}">
+                        <i class="icon-off pull-left"/>
+                    </h:commandLink>
+                </li>
+            </ul>
+        </div>
+    </h:form>
 </ui:composition>
