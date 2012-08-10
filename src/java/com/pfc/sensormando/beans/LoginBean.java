@@ -6,9 +6,13 @@ package com.pfc.sensormando.beans;
 
 import com.pfc.sensormando.hibernate.Helper;
 import com.pfc.sensormando.hibernate.Usuarios;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.validation.constraints.Size;
 
 /**
@@ -26,26 +30,39 @@ public class LoginBean {
     private String name;
     @Size(min = 1)
     private String password;
+    private static final int INCORRECTO = -1;
+    private int exitoLogin;
 
     public LoginBean() {
         helper = new Helper();
     }
 
     public String login() {
+        String redireccion = null;
         Usuarios user = null;
         if (name != null && password != null) {
             user = helper.compruebaLogin(name, password);
         }
         if (user != null) {
             userControllerBean.setUsuario(user);
+            redireccion = "login";
+        } else {
+            redireccion = "";
+            exitoLogin = INCORRECTO;
         }
-        return "login";
+        return redireccion;
     }
 
     public void logout() {
         userControllerBean.setUsuario(null);
+        try {
+            FacesContext.getCurrentInstance()
+                    .getExternalContext().redirect("index.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return;
     }
-
 
     public String getName() {
         return name;
@@ -61,6 +78,10 @@ public class LoginBean {
 
     public void setPassword(final String password) {
         this.password = password;
+    }
+
+    public int getExitoLogin() {
+        return exitoLogin;
     }
 
     public void setUserControllerBean(UserControllerBean userControllerBean) {
