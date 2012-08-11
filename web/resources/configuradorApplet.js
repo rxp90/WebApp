@@ -1,11 +1,10 @@
 window.onload = function() {
 
-    //Get a reference to the link on the page
-    // with an id of "mylink"
+    showMsgConnected();
+
     var btnPuerto = document.getElementById("puerto");
     var btnHost = document.getElementById("host");
-    //Set code to run when the link is clicked
-    // by assigning a function to "onclick"
+    
     btnPuerto.onclick = function() {
         var puerto = document.getElementById("puertoInput").value;
         if(validatePort(puerto)){
@@ -16,6 +15,7 @@ window.onload = function() {
             document.getElementById("divPuerto").setAttribute("class", "control-group error");
             document.getElementById("mensajePuerto").innerHTML = "Puerto no válido. Debe estar entre 1025 y 65535";
         }
+        showMsgConnected();
         return false;
     }
     btnHost.onclick = function() {
@@ -28,17 +28,11 @@ window.onload = function() {
             document.getElementById("divHost").setAttribute("class", "control-group error");
             document.getElementById("mensajeHost").innerHTML = "Dirección de IP no válida.";
         }
+        showMsgConnected();
         return false;
     }
     
-    if(isConnected){
-        document.getElementById("divConectado").style.visibility='visible';
-        document.getElementById("divNoConectado").style.visibility='hidden';
-
-    }else{
-        document.getElementById("divConectado").style.visibility='hidden';
-        document.getElementById("divNoConectado").style.visibility='visible';
-    }
+    
 }
 function validateIP(ip) { 
     var regex  = new RegExp("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
@@ -49,6 +43,12 @@ function validatePort(puerto){
     var maxPort = 65535;
     return puerto.valueOf() > minPort && maxPort > puerto.valueOf();
 }
-function isConnected(){
-    return juego.isConnected();
+function showMsgConnected(){
+    if(juego.isConnected()){
+        document.getElementById("divConectado").style.visibility='visible';
+        document.getElementById("divNoConectado").style.visibility='hidden';
+    }else{
+        document.getElementById("divConectado").style.visibility='hidden';
+        document.getElementById("divNoConectado").style.visibility='visible';
+    }
 }

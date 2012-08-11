@@ -16,33 +16,38 @@
                             Height : "400"
                         }, null, "1.7");
                     </script>
-                    <div class="row-fluid">                            
-                        <div class="control-group" id="divPuerto">
-                            <h:outputLabel value="Puerto" for="puertoInput"/>
-                            <div class="controls">
-                                <div class="input-append">
-                                    <input class="span4" id="puertoInput" size="16" type="number" placeholder="Ej: 1099" max="65535" min="1025"/>
-                                    <button class="btn" type="button" id="puerto">Go!</button>
-                                    <span id="mensajePuerto" class="help-inline"></span>
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="control-group" id="divPuerto">
+                                <h:outputLabel value="Puerto" for="puertoInput"/>
+                                <div class="controls">
+                                    <div class="input-append">
+                                        <input id="puertoInput" size="16" type="number" placeholder="Ej: 1099" max="65535" min="1025"/>
+                                        <button class="btn" type="button" id="puerto">Go!</button>
+                                        <span id="mensajePuerto" class="help-inline"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group" id="divHost">
+                                <h:outputLabel value="Host" for="hostInput"/>
+                                <div class="controls">
+                                    <div class="input-append">
+                                        <input id="hostInput" type="text" placeholder="Ej: 127.0.0.1"/>
+                                        <button class="btn" type="button" id="host">Go!</button>
+                                        <span id="mensajeHost" class="help-inline"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="control-group" id="divHost">
-                            <h:outputLabel value="Host" for="hostInput"/>
-                            <div class="controls">
-                                <div class="input-append">
-                                    <input class="span4" id="hostInput" type="text" placeholder="Ej: 127.0.0.1"/>
-                                    <button class="btn" type="button" id="host">Go!</button>
-                                    <span id="mensajeHost" class="help-inline"></span>
-                                </div>
+                        <div class="span6">
+                            <div id="divConexion" class="alert alert-success">
+                                <h:outputText value="Conectado correctamente."/>
+                            </div> 
+                            <div id="divNoConectado" class="alert alert-error">
+                                <h:outputText value="No conectado. Revise la configuración del puerto y el host."/>
                             </div>
                         </div>
-                        <div id="divConectado" class="alert alert-success">
-                            Conectado.
-                        </div> 
-                        <div id="divNoConectado" class="alert alert-error">
-                            No conectado.
-                        </div>
+
                     </div>
                 </div>
             </ui:define>
