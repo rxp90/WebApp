@@ -35,7 +35,7 @@
                                     <h:outputLabel value="Password" for="passwordInput"/>
                                     <div class="controls">
                                         <div class="input-prepend">
-                                            <span class="add-on"><i class="icon-certificate"></i></span>         
+                                            <span class="add-on"><i class="icon-asterisk"></i></span>         
                                             <h:inputSecret binding="#{passwordInput}" value="#{loginBean.password}" id="passwordInput" class="input-xlarge"/>
                                         </div>
                                         <h:message class="help-inline" for="passwordInput"/>
@@ -50,10 +50,10 @@
                                 <br/>
                                 <h:outputText value="El usuario o la contraseña no son válidos. Asegúrate de que el bloqueo de mayúsculas no está activado e inténtalo de nuevo."/>
                             </h:panelGroup>
-                            <p>
+                            <div class="btn-group">
                                 <h:commandButton class="btn btn-large btn-primary" action="#{loginBean.login()}" value="Iniciar sesión"/>
                                 <h:commandButton type="reset" class="btn btn-large" value="Limpiar"/>
-                            </p>
+                            </div>
                         </h:form>
                     </div>
                     <div class="span6">
