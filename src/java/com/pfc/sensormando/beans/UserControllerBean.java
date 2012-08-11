@@ -4,6 +4,7 @@
  */
 package com.pfc.sensormando.beans;
 
+import com.pfc.sensormando.hibernate.Helper;
 import com.pfc.sensormando.hibernate.Usuarios;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
@@ -21,11 +22,13 @@ public class UserControllerBean implements Serializable {
      * Usuario perteneciente a la sesión.
      */
     private Usuarios usuario;
+    private Helper helper;
 
     /**
      * Creates a new instance of UserControllerBean
      */
     public UserControllerBean() {
+        this.helper = new Helper();
     }
 
     public Usuarios getUsuario() {
@@ -42,5 +45,9 @@ public class UserControllerBean implements Serializable {
 
     public boolean isAdmin() {
         return usuario != null && usuario.getAdministrador() == 'y';
+    }
+
+    public void actualizaUsuario() {
+        helper.actualizaUsuario(usuario);
     }
 }

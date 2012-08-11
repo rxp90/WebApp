@@ -6,73 +6,95 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="content">
-        <h:form id="formRegistro" rendered="#{userControllerBean.admin}">
-            <fieldset class="control-group">
-                <legend>Crear usuario</legend> 
-                <h:panelGroup id="userPanel" layout="block" styleClass="#{(!userInput.valid) ?'control-group error':''}">
-                    <h:outputLabel value="User" for="userInput"/>
-                    <div class="controls">
-                        <div class="input-prepend">
-                            <span class="add-on"><i class="icon-user"></i></span>         
-                            <h:inputText binding="#{userInput}" value="#{registroBean.user}" id="userInput" class="span3"/>
+        <h:form id="formRegistro" rendered="#{userControllerBean.admin}" class="form-horizontal">
+            <div class="span9">
+                <fieldset>
+                    <legend>Crear usuario</legend> 
+                    <h:panelGroup id="userPanel" layout="block" styleClass="#{(!userInput.valid) ?'control-group error':'control-group'}">
+                        <h:outputLabel value="User" for="userInput" class="control-label"/>
+                        <div class="controls">
+                            <div class="input-prepend">
+                                <span class="add-on"><i class="icon-user"></i></span>         
+                                <h:inputText binding="#{userInput}" value="#{registroBean.user}" id="userInput"/>
+                            </div>
+                            <h:message class="help-inline" for="userInput"/>
                         </div>
-                        <h:message class="help-inline" for="userInput"/>
-                    </div>
-                </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup id="passwordPanel" layout="block" styleClass="#{(!passwordInput.valid) ?'control-group error':'control-group'}">
+                        <h:outputLabel value="Password" for="passwordInput" class="control-label"/>
+                        <div class="controls">
+                            <div class="input-prepend">
+                                <span class="add-on"><i class="icon-certificate"></i></span>         
+                                <h:inputSecret binding="#{passwordInput}" value="#{registroBean.password}" id="passwordInput"/>
+                            </div>
+                            <h:message class="help-inline" for="passwordInput"/>
+                        </div>
+                    </h:panelGroup>
 
-                <h:panelGroup id="passwordPanel" layout="block" styleClass="#{(!passwordInput.valid) ?'control-group error':''}">
-                    <h:outputLabel value="Password" for="passwordInput"/>
-                    <div class="controls">
-                        <div class="input-prepend">
-                            <span class="add-on"><i class="icon-certificate"></i></span>         
-                            <h:inputSecret binding="#{passwordInput}" value="#{registroBean.password}" id="passwordInput" class="span3"/>
+                    <h:panelGroup id="nombrePanel" layout="block" styleClass="#{(!nombreInput.valid) ?'control-group error':'control-group'}">
+                        <h:outputLabel value="Nombre" for="nombreInput" class="control-label"/>
+                        <div class="controls">
+                            <div class="input-prepend">
+                                <span class="add-on"><i class="icon-info-sign"></i></span>         
+                                <h:inputText binding="#{nombreInput}" value="#{registroBean.nombre}" id="nombreInput"/>
+                            </div>
+                            <h:message class="help-inline" for="nombreInput"/>
                         </div>
-                        <h:message class="help-inline" for="passwordInput"/>
-                    </div>
-                </h:panelGroup>
+                    </h:panelGroup>
 
-                <h:panelGroup id="nombrePanel" layout="block" styleClass="#{(!nombreInput.valid) ?'control-group error':''}">
-                    <h:outputLabel value="Nombre" for="nombreInput"/>
-                    <div class="controls">
-                        <div class="input-prepend">
-                            <span class="add-on"><i class="icon-info-sign"></i></span>         
-                            <h:inputText binding="#{nombreInput}" class="span3" value="#{registroBean.nombre}" id="nombreInput"/>
+                    <h:panelGroup id="emailPanel" layout="block" styleClass="#{(!emailInput.valid) ?'control-group error':'control-group'}">
+                        <h:outputLabel value="Email" for="emailInput" class="control-label"/>
+                        <div class="controls">
+                            <div class="input-prepend">
+                                <span class="add-on"><i class="icon-envelope"></i></span>         
+                                <h:inputText binding="#{emailInput}" value="#{registroBean.email}" id="emailInput"/>
+                            </div>
+                            <h:message class="help-inline" for="emailInput"/>
                         </div>
-                        <h:message class="help-inline" for="nombreInput"/>
+                    </h:panelGroup>
+                    <div class="control-group">
+                        <h:outputLabel value="Otras opciones" class="control-label"/>
+                        <div class="controls">                     
+                            <h:outputLabel value="Baja" for="bajaInput" class="checkbox">
+                                <h:selectBooleanCheckbox value="#{registroBean.baja}" id="bajaInput"/>
+                            </h:outputLabel>
+                            <h:outputLabel value="Administrador" for="administradorInput" class="checkbox">
+                                <h:selectBooleanCheckbox value="#{registroBean.administrador}" id="administradorInput"/>
+                            </h:outputLabel>
+                        </div>
                     </div>
-                </h:panelGroup>
+                    <div class="btn-group pull-right">
+                        <h:commandButton type="submit" class="btn btn-large btn-primary" action="#{registroBean.registrarse()}" value="Crear cuenta"/>
+                        <h:commandButton type="reset" class="btn btn-large" value="Limpiar"/>
+                    </div>
+                </fieldset>
 
-                <h:panelGroup id="emailPanel" layout="block" styleClass="#{(!emailInput.valid) ?'control-group error':''}">
-                    <h:outputLabel value="Email" for="emailInput"/>
-                    <div class="controls">
-                        <div class="input-prepend">
-                            <span class="add-on"><i class="icon-envelope"></i></span>         
-                            <h:inputText binding="#{emailInput}" value="#{registroBean.email}" id="emailInput" class="span3"/>
-                        </div>
-                        <h:message class="help-inline" for="emailInput"/>
+                <div class="row">
+                    <div class="span9">
+                        <h:panelGroup layout="block" class="alert alert-error" rendered="#{registroBean.exito eq registroBean.ERROR_REGISTRO}">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <h4 class="alert-heading">        
+                                <h:outputText value="Error al registrar el usuario."/>
+                            </h4>
+                            <h:outputText value="Ocurrió un error al registrar el usuario en la base de datos."/>
+                        </h:panelGroup>
+                        <h:panelGroup layout="block" class="alert alert-success" rendered="#{registroBean.exito eq registroBean.REGISTRO_CORRECTO}">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <h4 class="alert-heading">        
+                                <h:outputText value="¡Hurra!"/>
+                            </h4>
+                            <h:outputText value="El usuario fue creado con éxito y se le envió un email con sus datos para iniciar sesión."/>
+                        </h:panelGroup>
+                        <h:panelGroup layout="block" class="alert alert-block" rendered="#{registroBean.exito eq registroBean.REGISTRO_CORRECTO_ERROR_ENVIAR_EMAIL}">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <h4 class="alert-heading">        
+                                <h:outputText value="Error al enviar email."/>
+                            </h4>
+                            <h:outputText value="El usuario fue creado correctamente pero hubo un error al enviarle un email con sus datos."/>
+                        </h:panelGroup>
                     </div>
-                </h:panelGroup>
-             
-                <h:panelGroup id="bajaPanel" layout="block" styleClass="#{(!bajaInput.valid) ?'control-group error':'control-group'}">
-                    <div class="controls">
-                        <div class="checkbox inline">             
-                            <h:outputLabel value="Baja" for="bajaInput"/>
-                            <h:selectBooleanCheckbox binding="#{bajaInput}" value="#{registroBean.baja}" id="bajaInput"/>
-                        </div>
-                        <h:message class="help-inline" for="bajaInput"/>
-                    </div>
-                </h:panelGroup>
-                <h:panelGroup id="adminPanel" layout="block" styleClass="#{(!adminInput.valid) ?'control-group error':'control-group'}">
-                    <div class="controls">
-                        <div class="checkbox inline">         
-                            <h:outputLabel value="Administrador" for="adminInput"/>
-                            <h:selectBooleanCheckbox binding="#{adminInput}" value="#{registroBean.administrador}" id="adminInput"/>
-                        </div>
-                        <h:message class="help-inline" for="adminInput"/>
-                    </div>
-                </h:panelGroup>
-            </fieldset>
-            <h:commandButton type="submit" class="btn" action="#{registroBean.registrarse()}" value="Submit"/>
+                </div>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

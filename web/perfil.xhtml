@@ -1,58 +1,54 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:body>
         <ui:composition template="/WEB-INF/templates/layout.xhtml">
             <ui:define name="content">
-                <h:form id="formPerfil" rendered="#{userControllerBean.loggedIn}" class="span8">
-                    <fieldset class="control-group">
-                        <legend>Mi perfil</legend> 
-                        <h:panelGroup id="userPanel" layout="block" styleClass="#{(!userInput.valid) ?'control-group error':''}">
-                            <h:outputLabel value="User" for="userInput"/>
-                            <div class="controls">
-                                <div class="input-prepend">
-                                    <span class="add-on"><i class="icon-user"></i></span>         
-                                    <h:inputText binding="#{userInput}" value="#{userControllerBean.usuario.username}" id="userInput" class="span3"/>
-                                </div>
-                                <h:message class="help-inline" for="userInput"/>
-                            </div>
-                        </h:panelGroup>
+                <h:form id="formPerfil" rendered="#{userControllerBean.loggedIn}" class="form-horizontal">
+                    <div class="span9">
+                        <fieldset>
+                            <legend>Mi perfil</legend> 
 
-                        <h:panelGroup id="passwordPanel" layout="block" styleClass="#{(!passwordInput.valid) ?'control-group error':''}">
-                            <h:outputLabel value="Password" for="passwordInput"/>
-                            <div class="controls">
-                                <div class="input-prepend">
-                                    <span class="add-on"><i class="icon-certificate"></i></span>         
-                                    <h:inputSecret binding="#{passwordInput}" value="#{userControllerBean.usuario.password}" id="passwordInput" class="span3"/>
+                            <h:panelGroup id="userPanel" layout="block" styleClass="#{(!userInput.valid) ?'control-group error':'control-group'}">
+                                <h:outputLabel value="User" for="userInput" class="control-label"/>
+                                <div class="controls">
+                                    <div class="input-prepend">
+                                        <span class="add-on"><i class="icon-user"></i></span>         
+                                        <h:inputText binding="#{userInput}" value="#{userControllerBean.usuario.username}" id="userInput"/>
+                                    </div>
+                                    <h:message class="help-inline" for="userInput"/>
                                 </div>
-                                <h:message class="help-inline" for="passwordInput"/>
-                            </div>
-                        </h:panelGroup>
-
-                        <h:panelGroup id="nombrePanel" layout="block" styleClass="#{(!nombreInput.valid) ?'control-group error':''}">
-                            <h:outputLabel value="Nombre" for="nombreInput"/>
-                            <div class="controls">
-                                <div class="input-prepend">
-                                    <span class="add-on"><i class="icon-info-sign"></i></span>         
-                                    <h:inputText binding="#{nombreInput}" class="span3" value="#{userControllerBean.usuario.nombre}" id="nombreInput"/>
+                            </h:panelGroup>
+                            <h:panelGroup id="nombrePanel" layout="block" styleClass="#{(!nombreInput.valid) ?'control-group error':'control-group'}">
+                                <h:outputLabel value="Nombre" for="nombreInput" class="control-label"/>
+                                <div class="controls">
+                                    <div class="input-prepend">
+                                        <span class="add-on"><i class="icon-info-sign"></i></span>         
+                                        <h:inputText binding="#{nombreInput}" value="#{userControllerBean.usuario.nombre}" id="nombreInput"/>
+                                    </div>
+                                    <h:message class="help-inline" for="nombreInput"/>
                                 </div>
-                                <h:message class="help-inline" for="nombreInput"/>
-                            </div>
-                        </h:panelGroup>
-
-                        <h:panelGroup id="emailPanel" layout="block" styleClass="#{(!emailInput.valid) ?'control-group error':''}">
-                            <h:outputLabel value="Email" for="emailInput"/>
-                            <div class="controls">
-                                <div class="input-prepend">
-                                    <span class="add-on"><i class="icon-envelope"></i></span>         
-                                    <h:inputText binding="#{emailInput}" value="#{userControllerBean.usuario.email}" id="emailInput" class="span3"/>
+                            </h:panelGroup>
+                            <h:panelGroup id="emailPanel" layout="block" styleClass="#{(!emailInput.valid) ?'control-group error':'control-group'}">
+                                <h:outputLabel value="Email" for="emailInput" class="control-label"/>
+                                <div class="controls">
+                                    <div class="input-prepend">
+                                        <span class="add-on"><i class="icon-envelope"></i></span>         
+                                        <h:inputText binding="#{emailInput}" value="#{userControllerBean.usuario.email}" id="emailInput"/>
+                                    </div>
+                                    <h:message class="help-inline" for="emailInput"/>
                                 </div>
-                                <h:message class="help-inline" for="emailInput"/>
+                            </h:panelGroup>
+                            <div class="btn-group pull-right">
+                                <h:commandButton type="submit" class="btn btn-large btn-primary" action="#{userControllerBean.actualizaUsuario()}" value="Modificar">             
+                                    <f:ajax execute="@form" render="formPerfil"/>
+                                </h:commandButton>               
+                                <h:commandButton type="reset" class="btn btn-large" value="Cancelar"/>
                             </div>
-                        </h:panelGroup>
-                    </fieldset>
-                    <h:commandButton type="submit" class="btn" action="perfil" value="Modificar"/>
+                        </fieldset>
+                    </div>
                 </h:form>
             </ui:define>
         </ui:composition>

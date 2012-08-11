@@ -115,4 +115,30 @@ public class Helper {
         }
         return password;
     }
+
+    public boolean actualizaUsuario(Usuarios usuario) {
+        boolean res = false;
+        if (session != null) {
+            Transaction tx = null;
+            try {
+                tx = session.beginTransaction();
+                //do some work
+                session.merge(usuario);
+                tx.commit();
+
+                res = true;
+
+                Logger logger = Logger.getLogger("Helper");
+                logger.log(Level.INFO, "Usuario {0} modificado", usuario);
+
+            } catch (Exception e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+            } finally {
+                //session.close(); No es necesario con getCurrentSession();
+            }
+        }
+        return res;
+    }
 }
