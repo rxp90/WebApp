@@ -5,7 +5,28 @@
     <h:body>
         <ui:composition template="/WEB-INF/templates/layout.xhtml">
             <ui:define name="content">
-                <h:outputScript name="configuradorApplet.js" />
+                <script>
+                    // Wait for the page to load first
+                    window.onload = function() {
+
+                        //Get a reference to the link on the page
+                        // with an id of "mylink"
+                        var btnPuerto = document.getElementById("puerto");
+                        var btnHost = document.getElementById("host");
+                        //Set code to run when the link is clicked
+                        // by assigning a function to "onclick"
+                        btnPuerto.onclick = function() {
+                            var puerto = document.getElementById("puertoInput").value;
+                            juego.setPuerto(puerto);
+                            return false;
+                        }
+                        btnHost.onclick = function() {
+                            var host = document.getElementById("hostInput").value;
+                            juego.setPuerto(host);
+                            return false;
+                        }
+                    }
+                </script>
                 <div class="span8">
                     <script>
                         deployJava.runApplet({
@@ -17,25 +38,30 @@
                         }, null, "1.6");
                     </script>
                     <div class="row-fluid">                            
-                        <div class="control-group" id="divPuerto">
+                        <div class="control-group">
                             <h:outputLabel value="Puerto" for="puertoInput"/>
                             <div class="controls">
                                 <div class="input-append">
-                                    <input class="span4" id="puertoInput" size="16" type="number" placeholder="Ej: 1099" max="65535" min="1"/>
+                                    <input class="span4" id="puertoInput" size="16" type="number" placeholder="Ej: 1099"/>
                                     <button class="btn" type="button" id="puerto">Go!</button>
-                                    <span id="mensajePuerto" class="help-inline"></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="control-group" id="divHost">
+                        <div class="control-group">
                             <h:outputLabel value="Host" for="hostInput"/>
                             <div class="controls">
                                 <div class="input-append">
-                                    <input class="span4" id="hostInput" type="text" placeholder="Ej: 127.0.0.1"/>
+                                    <input class="span4" id="hostInput" type="text" pattern="/^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.
+                                           ([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$/" placeholder="Ej: 127.0.0.1"/>
                                     <button class="btn" type="button" id="host">Go!</button>
-                                    <span id="mensajeHost" class="help-inline"></span>
                                 </div>
                             </div>
+                        </div>
+                        <div id="divConectado" class="alert alert-success">
+                            Conectado.
+                        </div> 
+                        <div id="divNoConectado" class="alert alert-error">
+                            No conectado.
                         </div>
                     </div>
                 </div>
