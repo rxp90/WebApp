@@ -60,7 +60,7 @@
                         <div class="row-fluid">
                             <h:form rendered="#{!userControllerBean.loggedIn}">
                                 <h2>¿No tienes cuenta?</h2>
-                                <p>Contacta con un administrador para que te proporcione una y disfrutar de todas las características.</p>
+                                <p>Contacta con un administrador para que te proporcione una y disfrutar de todas las características. Una vez esté creada tu cuenta, recibirás un email con los datos de la misma.</p>
                             </h:form>
                         </div>
                         <div class="row-fluid">
@@ -107,6 +107,10 @@
                         </div>
                     </div>
                 </div>
+            </ui:define>
+            <!-- Para evitar la carga del menú lateral en la web de inicio-->
+            <ui:define name="sidebar">
+
             </ui:define>
             <!-- </div> -->
         </ui:composition>

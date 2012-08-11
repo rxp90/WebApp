@@ -73,8 +73,10 @@ public class Usuarios  implements java.io.Serializable {
         this.administrador = administrador;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Usuarios{" + "username=" + username + ", password=" + password + ", nombre=" + nombre + ", email=" + email + ", baja=" + baja + ", administrador=" + administrador + '}';
+    }
 
 }
 

@@ -6,7 +6,9 @@ package com.pfc.sensormando.beans;
 
 import com.pfc.sensormando.hibernate.Helper;
 import com.pfc.sensormando.hibernate.Usuarios;
+import com.pfc.sensormando.utilidades.EnviarEmail;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
@@ -108,6 +110,19 @@ public class RegistroBean {
         }
 
         helper.crearUsuario(new Usuarios(user, password, nombre, email, bajaChar, adminChar));
+        
+        EnviarEmail emailSender = new EnviarEmail();
+        emailSender.setDestinatario(email);
+        emailSender.setAsunto("Cuenta creada en Sensor Mando");
+        
+        StringBuilder cuerpo = new StringBuilder("Enhorabuena. Un administrador te ha creado una cuenta para la aplicación Sensor Mando. Aquí tienes tus datos para iniciar sesión.\n\n\tNombre de usuario: ");
+        cuerpo.append(user);
+        cuerpo.append("\n\tContraseña: ");
+        cuerpo.append(password);
+        
+        emailSender.setCuerpo(cuerpo.toString());
+        emailSender.sendEmail();
+        
         return "login";
     }
 }

@@ -20,7 +20,7 @@
         </style>
         <h:outputStylesheet name="bootstrap/css/bootstrap-responsive.min.css" />
     </h:head>
-    <h:body>
+    <h:body>    
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
@@ -36,6 +36,12 @@
                     <ui:include src="sidebar.xhtml"/>
                 </ui:insert>
                 <!--/.well -->
+                <noscript>
+                    <div class="alert alert-error">
+                        <h4 class="alert-heading"><h:outputText value="Error de JavaScript"/></h4>
+                        <h:outputText value="Parece que JavaScript está deshabilitado o no es soportado por tu navegador. Por favor, habilítalo para el correcto funcionamiento de la aplicación."/>
+                    </div>            
+                </noscript>
                 <ui:insert name="content">
                     <ui:include src="content.xhtml" />
                 </ui:insert>
