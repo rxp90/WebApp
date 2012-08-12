@@ -1,21 +1,20 @@
-$(document).ready(function(){
-    $("#submit").click(function(){
-        $(".error").hide();
-        var hasError = false;
-        var passwordVal = $("#newPasswordInput").val();
-        var checkVal = $("#verifyPasswordInput").val();
-        if (passwordVal == '') {
-            $("#newPasswordInput").after('<span class="control-group error">Please enter a password.</span>');
-            hasError = true;
-        } else if (checkVal == '') {
-            $("#verifyPasswordInput").after('<span class="control-group error">Please re-enter your password.</span>');
-            hasError = true;
-        } else if (passwordVal != checkVal ) {
-            $("#verifyPasswordInput").after('<span class="control-group error">Passwords do not match.</span>');
-            hasError = true;
-        }
-        if(hasError == true) {
-            return false;
-        }
-    });
-});
+function passwordMatcher(){
+    var correct = true;
+    var password = document.getElementById("formCambioPassword:newPasswordInput");
+    var check = document.getElementById("formCambioPassword:verifyPasswordInput");
+    var passwordVal = password.value;
+    var checkVal = check.value;
+    
+    if(passwordVal == ''){
+        password.appendChild('<span class="control-group error">Please enter a password.</span>');
+        correct = false;
+    }else if (checkVal == '') {
+        check.appendChild('<span class="control-group error">Please enter a password.</span>');
+        correct = false;
+    }else if (passwordVal != checkVal ) {
+        var target = document.getElementById('target');
+        target.innerHTML = "hola";
+        correct = false;
+    }
+    return correct;
+}
