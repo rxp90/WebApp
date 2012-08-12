@@ -1,4 +1,4 @@
-jQuery(function(){
+$(document).ready(function(){
     $("#submit").click(function(){
         $(".error").hide();
         var hasError = false;
