@@ -64,36 +64,34 @@
                         </div>
                     </div>
                     <div class="btn-group pull-right">
-                        <h:commandButton type="submit" class="btn btn-large btn-primary" action="#{registroBean.registrarse()}" value="Crear cuenta"/>
+                        <h:commandButton type="submit" class="btn btn-large btn-primary" action="#{registroBean.registrarse()}" value="Crear cuenta">
+                            <f:ajax execute="@form" render="formRegistro"/>
+                        </h:commandButton>
                         <h:commandButton type="reset" class="btn btn-large" value="Limpiar"/>
                     </div>
                 </fieldset>
 
-                <div class="row-fluid">
-                    <div class="span9">
-                        <h:panelGroup layout="block" class="alert alert-error" rendered="#{registroBean.exito eq registroBean.ERROR_REGISTRO}">
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                            <h4 class="alert-heading">        
-                                <h:outputText value="Error al registrar el usuario."/>
-                            </h4>
-                            <h:outputText value="Ocurrió un error al registrar el usuario en la base de datos."/>
-                        </h:panelGroup>
-                        <h:panelGroup layout="block" class="alert alert-success" rendered="#{registroBean.exito eq registroBean.REGISTRO_CORRECTO}">
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                            <h4 class="alert-heading">        
-                                <h:outputText value="¡Hurra!"/>
-                            </h4>
-                            <h:outputText value="El usuario fue creado con éxito y se le envió un email con sus datos para iniciar sesión."/>
-                        </h:panelGroup>
-                        <h:panelGroup layout="block" class="alert alert-block" rendered="#{registroBean.exito eq registroBean.REGISTRO_CORRECTO_ERROR_ENVIAR_EMAIL}">
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                            <h4 class="alert-heading">        
-                                <h:outputText value="Error al enviar email."/>
-                            </h4>
-                            <h:outputText value="El usuario fue creado correctamente pero hubo un error al enviarle un email con sus datos."/>
-                        </h:panelGroup>
-                    </div>
-                </div>
+                <h:panelGroup layout="block" class="alert alert-error" rendered="#{registroBean.exito eq registroBean.ERROR_REGISTRO}">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h4 class="alert-heading">        
+                        <h:outputText value="Error al registrar el usuario."/>
+                    </h4>
+                    <h:outputText value="Ocurrió un error al registrar el usuario en la base de datos."/>
+                </h:panelGroup>
+                <h:panelGroup layout="block" class="alert alert-success" rendered="#{registroBean.exito eq registroBean.REGISTRO_CORRECTO}">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h4 class="alert-heading">        
+                        <h:outputText value="¡Hurra!"/>
+                    </h4>
+                    <h:outputText value="El usuario fue creado con éxito y se le envió un email con sus datos para iniciar sesión."/>
+                </h:panelGroup>
+                <h:panelGroup layout="block" class="alert alert-block" rendered="#{registroBean.exito eq registroBean.REGISTRO_CORRECTO_ERROR_ENVIAR_EMAIL}">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h4 class="alert-heading">        
+                        <h:outputText value="Error al enviar email."/>
+                    </h4>
+                    <h:outputText value="El usuario fue creado correctamente pero hubo un error al enviarle un email con sus datos."/>
+                </h:panelGroup>
             </div>
         </h:form>
     </ui:define>

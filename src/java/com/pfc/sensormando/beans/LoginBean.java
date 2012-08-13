@@ -30,7 +30,8 @@ public class LoginBean {
     private String name;
     @Size(min = 1)
     private String password;
-    private static final int INCORRECTO = -1;
+    private final int INCORRECTO = -1;
+    private final int BAJA = -2;
     private int exitoLogin;
 
     public LoginBean() {
@@ -44,8 +45,13 @@ public class LoginBean {
             user = helper.compruebaLogin(name, password);
         }
         if (user != null) {
-            userControllerBean.setUsuario(user);
-            redireccion = "login";
+            if (user.getBaja() == 'n') {
+                userControllerBean.setUsuario(user);
+                redireccion = "login";
+            } else {
+                exitoLogin = BAJA;
+                redireccion = "";
+            }
         } else {
             redireccion = "";
             exitoLogin = INCORRECTO;
@@ -61,7 +67,6 @@ public class LoginBean {
         } catch (IOException ex) {
             Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return;
     }
 
     public String getName() {
@@ -82,6 +87,14 @@ public class LoginBean {
 
     public int getExitoLogin() {
         return exitoLogin;
+    }
+
+    public int getINCORRECTO() {
+        return INCORRECTO;
+    }
+
+    public int getBAJA() {
+        return BAJA;
     }
 
     public void setUserControllerBean(UserControllerBean userControllerBean) {

@@ -5,9 +5,11 @@
 package com.pfc.sensormando.hibernate;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -161,5 +163,28 @@ public class Helper implements Serializable {
             }
         }
         return res;
+    }
+
+    public List<Usuarios> getUsuarios(Usuarios user) {
+
+        this.session = HibernateUtil.getSessionFactory().openSession();
+        List<Usuarios> listaUsuarios = new ArrayList<Usuarios>();
+        if (session != null) {
+            try {
+                Query query = session.createQuery("from Usuarios s where s.username!=:adminUsername");
+                query.setParameter("adminUsername", user.getUsername());
+
+                listaUsuarios = query.list();
+
+                Logger logger = Logger.getLogger("Helper");
+                logger.log(Level.INFO, "Recogida lista de usuarios {0}", listaUsuarios.toString());
+            } catch (Exception e) {
+                Logger logger = Logger.getLogger("Helper");
+                logger.log(Level.SEVERE, "Error en la consulta de usuarios {0}", e.getMessage());
+            } finally {
+                session.close();
+            }
+        }
+        return listaUsuarios;
     }
 }
