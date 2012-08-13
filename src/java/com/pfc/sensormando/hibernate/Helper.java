@@ -4,6 +4,7 @@
  */
 package com.pfc.sensormando.hibernate;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,15 +15,23 @@ import org.hibernate.Transaction;
  *
  * @author Sobremesa
  */
-public class Helper {
+public class Helper implements Serializable {
 
     Session session = null;
 
     public Helper() {
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
+        /*
+         * http://stackoverflow.com/questions/2378572/hibernate-session-is-closed
+         this.session = HibernateUtil.getSessionFactory().getCurrentSession();
+         * Ahora tengo que hacer close explícitamente.
+         */
+
+        this.session = HibernateUtil.getSessionFactory().openSession();
     }
 
     public boolean crearUsuario(Usuarios usuario) {
+        this.session = HibernateUtil.getSessionFactory().openSession();
+
         boolean res = false;
         if (session != null) {
             Transaction tx = null;
@@ -30,7 +39,7 @@ public class Helper {
                 tx = session.beginTransaction();
                 //do some work
                 session.save(usuario);
-                tx.commit();
+                tx.commit(); // Flush automático
 
                 res = true;
 
@@ -41,8 +50,10 @@ public class Helper {
                 if (tx != null) {
                     tx.rollback();
                 }
+                Logger logger = Logger.getLogger("Helper");
+                logger.log(Level.SEVERE, "Error en la transacción {0}", e.getMessage());
             } finally {
-                //session.close(); No es necesario con getCurrentSession();
+                session.close();
             }
 
         }
@@ -51,6 +62,7 @@ public class Helper {
 
     public Usuarios compruebaLogin(String name, String password) {
         Usuarios res = null;
+        this.session = HibernateUtil.getSessionFactory().openSession();
 
         if (session != null) {
             Transaction tx = null;
@@ -74,8 +86,10 @@ public class Helper {
                 if (tx != null) {
                     tx.rollback();
                 }
+                Logger logger = Logger.getLogger("Helper");
+                logger.log(Level.SEVERE, "Error en la transacción {0}", e.getMessage());
             } finally {
-                //session.close(); No es necesario con getCurrentSession();
+                session.close();
             }
 
         }
@@ -84,6 +98,8 @@ public class Helper {
     }
 
     public String recuperarPassword(String email) {
+        this.session = HibernateUtil.getSessionFactory().openSession();
+
         String password = null;
         if (session != null) {
             Transaction tx = null;
@@ -108,14 +124,18 @@ public class Helper {
                 if (tx != null) {
                     tx.rollback();
                 }
+                Logger logger = Logger.getLogger("Helper");
+                logger.log(Level.SEVERE, "Error en la transacción {0}", e.getMessage());
             } finally {
-                //session.close(); No es necesario con getCurrentSession();
+                session.close();
             }
         }
         return password;
     }
 
     public boolean actualizaUsuario(Usuarios usuario) {
+        this.session = HibernateUtil.getSessionFactory().openSession();
+
         boolean res = false;
         if (session != null) {
             Transaction tx = null;
@@ -134,8 +154,10 @@ public class Helper {
                 if (tx != null) {
                     tx.rollback();
                 }
+                Logger logger = Logger.getLogger("Helper");
+                logger.log(Level.SEVERE, "Error en la transacción {0}", e.getMessage());
             } finally {
-                //session.close(); No es necesario con getCurrentSession();
+                session.close();
             }
         }
         return res;

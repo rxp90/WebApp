@@ -37,9 +37,9 @@ public class RegistroBean {
     private boolean administrador;
     private int exito;
     
-    private static final int REGISTRO_CORRECTO = 1;
-    private static final int REGISTRO_CORRECTO_ERROR_ENVIAR_EMAIL = 2;
-    private static final int ERROR_REGISTRO = -1;
+    private final int REGISTRO_CORRECTO = 1;
+    private final int REGISTRO_CORRECTO_ERROR_ENVIAR_EMAIL = 2;
+    private final int ERROR_REGISTRO = -1;
 
     /**
      * Creates a new instance of RegistroBean

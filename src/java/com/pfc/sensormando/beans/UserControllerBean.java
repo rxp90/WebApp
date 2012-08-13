@@ -47,7 +47,7 @@ public class UserControllerBean implements Serializable {
         return usuario != null && usuario.getAdministrador() == 'y';
     }
 
-    public void actualizaUsuario() {
-        helper.actualizaUsuario(usuario);
+    public boolean actualizaUsuario() {
+        return helper.actualizaUsuario(usuario);
     }
 }
