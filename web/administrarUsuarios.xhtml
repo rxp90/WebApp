@@ -74,6 +74,9 @@
                                 <h:commandButton type="submit" class="btn btn-large btn-primary" action="#{administrarUsuariosBean.modificarUsuario()}" value="Modificar">
                                     <f:ajax execute="@form" render="formAdministrarUsuarios"/>
                                 </h:commandButton>
+                                <h:commandButton type="button" class="btn btn-large btn-warning" action="#{administrarUsuariosBean.eliminarUsuario()}" value="Eliminar usuario" onclick="return confirm('¿Está seguro de que desea borrar el usuario?');">
+                                    <f:ajax execute="@form" render="formAdministrarUsuarios"/>
+                                </h:commandButton>
                                 <h:commandButton type="reset" class="btn btn-large" value="Restaurar"/>
                             </div>
                         </fieldset>  
@@ -89,7 +92,7 @@
                             <h4 class="alert-heading">        
                                 <h:outputText value="¡Hurra!"/>
                             </h4>
-                            <h:outputText value="Los datos del usuario fueron modificados con éxito."/>
+                            <h:outputText value="La operación se realizó con éxito."/>
                         </h:panelGroup>
 
                     </div>

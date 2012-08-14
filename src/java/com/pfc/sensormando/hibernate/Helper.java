@@ -61,6 +61,36 @@ public class Helper implements Serializable {
         }
         return res;
     }
+    public boolean eliminar(Usuarios usuario) {
+        this.session = HibernateUtil.getSessionFactory().openSession();
+
+        boolean res = false;
+        if (session != null) {
+            Transaction tx = null;
+            try {
+                tx = session.beginTransaction();
+                //do some work
+                session.delete(usuario);
+                tx.commit(); // Flush automático
+
+                res = true;
+
+                Logger logger = Logger.getLogger("Helper");
+                logger.log(Level.INFO, "Usuario {0} borrado", usuario);
+
+            } catch (Exception e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                Logger logger = Logger.getLogger("Helper");
+                logger.log(Level.SEVERE, "Error en la transacción {0}", e.getMessage());
+            } finally {
+                session.close();
+            }
+
+        }
+        return res;
+    }
 
     public Usuarios compruebaLogin(String name, String password) {
         Usuarios res = null;

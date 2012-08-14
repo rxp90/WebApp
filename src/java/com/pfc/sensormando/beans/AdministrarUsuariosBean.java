@@ -8,16 +8,17 @@ import com.pfc.sensormando.hibernate.Helper;
 import com.pfc.sensormando.hibernate.Usuarios;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author Raul
  */
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class AdministrarUsuariosBean implements Serializable {
 
     @ManagedProperty(value = "#{userControllerBean}")
@@ -38,6 +39,10 @@ public class AdministrarUsuariosBean implements Serializable {
      * Creates a new instance of AdministrarUsuariosBean
      */
     public AdministrarUsuariosBean() {
+    }
+
+    @PostConstruct
+    public void init() {
         this.helper = new Helper();
         this.usuarios = helper.getUsuarios(userControllerBean.getUsuario());
         // Rellenamos los datos con el primer usuario.
@@ -70,6 +75,17 @@ public class AdministrarUsuariosBean implements Serializable {
         if (usuario != null) {
             if (helper.actualizaUsuario(usuario)) {
                 exito = CORRECTO;
+            } else {
+                exito = ERROR;
+            }
+        }
+    }
+
+    public void eliminarUsuario() {
+        if (usuario != null) {
+            if (helper.eliminar(usuario)) {
+                exito = CORRECTO;
+                usuario = null;
             } else {
                 exito = ERROR;
             }
